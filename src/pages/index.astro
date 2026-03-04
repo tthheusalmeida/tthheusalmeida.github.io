@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { BlogHome } from '../components/BlogHome';
-import { buildSearchIndex } from '../lib/searchIndex';
+import { buildSearchIndex, toRawPosts } from '../lib/searchIndex';
 
 const allPosts = await getCollection('blog');
 
@@ -16,18 +16,7 @@ const posts = allPosts.map((entry) => ({
   href: `/blog/${entry.id.replace(/\.(en|pt)$/, '')}`,
 }));
 
-const rawPosts = allPosts.map((entry) => ({
-  title: entry.data.title,
-  slug: entry.data.slug,
-  date: entry.data.date.toISOString(),
-  lang: entry.data.lang,
-  tags: entry.data.tags,
-  draft: entry.data.draft,
-  content: entry.body ?? '',
-  href: `/blog/${entry.id.replace(/\.(en|pt)$/, '')}`,
-}));
-
-const searchIndex = buildSearchIndex(rawPosts);
+const searchIndex = buildSearchIndex(toRawPosts(allPosts));
 ---
 
 <BaseLayout title="Blog | Matheus Almeida" searchIndex={searchIndex}>

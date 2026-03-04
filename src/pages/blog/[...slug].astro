@@ -5,7 +5,7 @@ import { RelatedPosts } from '../../components/RelatedPosts';
 import { BlogPostToc } from '../../components/BlogPostToc';
 import { calculateReadingTime } from '../../lib/readingTime';
 import { t } from '../../lib/i18n';
-import { buildSearchIndex } from '../../lib/searchIndex';
+import { buildSearchIndex, toRawPosts } from '../../lib/searchIndex';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
@@ -31,18 +31,7 @@ export async function getStaticPaths() {
       canonicalSlug: p.id.replace(/\.(en|pt)$/, ''),
     }));
 
-  const rawPosts = allPosts.map((p) => ({
-    title: p.data.title,
-    slug: p.data.slug,
-    date: p.data.date.toISOString(),
-    lang: p.data.lang,
-    tags: p.data.tags,
-    draft: p.data.draft,
-    content: p.body ?? '',
-    href: `/blog/${p.id.replace(/\.(en|pt)$/, '')}`,
-  }));
-
-  const searchIndex = buildSearchIndex(rawPosts);
+  const searchIndex = buildSearchIndex(toRawPosts(allPosts));
 
   const paths = [];
 

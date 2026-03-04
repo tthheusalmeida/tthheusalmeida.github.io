@@ -22,6 +22,32 @@ export interface RawPost {
   href: string;
 }
 
+export interface CollectionEntry {
+  id: string;
+  body?: string;
+  data: {
+    title: string;
+    slug: string;
+    date: Date;
+    lang: string;
+    tags: string[];
+    draft: boolean;
+  };
+}
+
+export function toRawPosts(entries: CollectionEntry[]): RawPost[] {
+  return entries.map((entry) => ({
+    title: entry.data.title,
+    slug: entry.data.slug,
+    date: entry.data.date.toISOString(),
+    lang: entry.data.lang,
+    tags: entry.data.tags,
+    draft: entry.data.draft,
+    content: entry.body ?? '',
+    href: `/blog/${entry.id.replace(/\.(en|pt)$/, '')}`,
+  }));
+}
+
 export function buildSearchIndex(posts: RawPost[]): SearchIndex {
   const index: SearchIndex = { en: [], pt: [] };
 
@@ -52,7 +78,7 @@ export function stripMarkdown(text: string): string {
     .replace(/^#{1,6}\s+/gm, '')
     .replace(/\*\*(.+?)\*\*/g, '$1')
     .replace(/\*(.+?)\*/g, '$1')
-    .replace(/`{1,3}[^`]*`{1,3}/g, '')
+    .replace(/`{1,3}[\s\S]*?`{1,3}/g, '')
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
     .replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1')
     .replace(/>\s?/gm, '')
