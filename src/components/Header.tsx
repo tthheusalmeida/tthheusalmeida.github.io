@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Moon, Sun, Globe, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { t, type Lang } from '@/lib/i18n';
+import { useLang } from '@/lib/useLang';
 
 const LANGUAGES: { code: Lang; label: string }[] = [
   { code: 'en', label: 'EN' },
@@ -10,7 +11,7 @@ const LANGUAGES: { code: Lang; label: string }[] = [
 
 export function Header() {
   const [dark, setDark] = React.useState(false);
-  const [lang, setLang] = React.useState<Lang>('en');
+  const lang = useLang();
 
   React.useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
@@ -19,11 +20,6 @@ export function Header() {
         (!storedTheme &&
           window.matchMedia('(prefers-color-scheme: dark)').matches),
     );
-
-    const storedLang = localStorage.getItem('lang');
-    if (storedLang === 'en' || storedLang === 'pt') {
-      setLang(storedLang);
-    }
   }, []);
 
   const toggleTheme = () => {
@@ -36,7 +32,6 @@ export function Header() {
   const cycleLang = () => {
     const idx = LANGUAGES.findIndex((l) => l.code === lang);
     const next = LANGUAGES[(idx + 1) % LANGUAGES.length];
-    setLang(next.code);
     document.documentElement.lang = next.code;
     localStorage.setItem('lang', next.code);
   };

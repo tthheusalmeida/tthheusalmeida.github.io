@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { t, type Lang } from '@/lib/i18n';
+import { t } from '@/lib/i18n';
+import { useLang } from '@/lib/useLang';
 import { getRelatedPosts, type PostForRelated } from '@/lib/relatedPosts';
 
 interface RelatedPostsProps {
@@ -8,28 +9,7 @@ interface RelatedPostsProps {
 }
 
 export function RelatedPosts({ canonicalSlug, allPosts }: RelatedPostsProps) {
-  const [lang, setLang] = React.useState<Lang>('en');
-
-  React.useEffect(() => {
-    const storedLang = localStorage.getItem('lang');
-    if (storedLang === 'en' || storedLang === 'pt') {
-      setLang(storedLang);
-    }
-
-    const observer = new MutationObserver(() => {
-      const htmlLang = document.documentElement.lang;
-      if (htmlLang === 'en' || htmlLang === 'pt') {
-        setLang(htmlLang);
-      }
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['lang'],
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  const lang = useLang();
 
   const currentPost = allPosts.find(
     (p) => p.canonicalSlug === canonicalSlug && p.lang === lang,

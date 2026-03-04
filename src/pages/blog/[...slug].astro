@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { RelatedPosts } from '../../components/RelatedPosts';
 import { calculateReadingTime } from '../../lib/readingTime';
+import { t } from '../../lib/i18n';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
@@ -70,6 +71,11 @@ for (const [lang, entry] of Object.entries(entries) as [
 const availableLangs = Object.keys(variants);
 const defaultTitle =
   variants.en?.data.title ?? variants.pt?.data.title ?? 'Post';
+
+const i18nBackLink = {
+  en: t('en', 'post.backToBlog'),
+  pt: t('pt', 'post.backToBlog'),
+};
 ---
 
 <BaseLayout title={`${defaultTitle} | tthheusalmeida`}>
@@ -79,7 +85,7 @@ const defaultTitle =
       class="mb-6 inline-block text-sm text-muted-foreground transition-colors hover:text-foreground"
       data-back-link
     >
-      ← Back to blog
+      {t('en', 'post.backToBlog')}
     </a>
 
     {
@@ -101,7 +107,7 @@ const defaultTitle =
               <span>·</span>
               <span data-reading-time>
                 {readingTime}{' '}
-                {lang === 'pt' ? 'min de leitura' : 'min read'}
+                {t(lang as 'en' | 'pt', 'post.minRead')}
               </span>
             </div>
             <div class="mt-3 flex flex-wrap gap-2">
@@ -126,10 +132,10 @@ const defaultTitle =
       role="alert"
     >
       <span data-fallback-text="en"
-        >This post is not available in your language. Showing fallback.</span
+        >{t('en', 'post.fallbackWarning')}</span
       >
       <span data-fallback-text="pt" style="display:none"
-        >Este post não está disponível no seu idioma. Exibindo alternativa.</span
+        >{t('pt', 'post.fallbackWarning')}</span
       >
     </div>
 
@@ -142,7 +148,7 @@ const defaultTitle =
 
   <script
     is:inline
-    define:vars={{ availableLangs }}
+    define:vars={{ availableLangs, i18nBackLink }}
   >
     (function () {
       function update() {
@@ -170,8 +176,7 @@ const defaultTitle =
 
         var backLink = document.querySelector('[data-back-link]');
         if (backLink) {
-          backLink.textContent =
-            lang === 'pt' ? '← Voltar ao blog' : '← Back to blog';
+          backLink.textContent = i18nBackLink[lang] || i18nBackLink['en'];
         }
       }
 

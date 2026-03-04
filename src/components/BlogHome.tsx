@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { t, type Lang, type TranslationKey } from '@/lib/i18n';
+import { t, type TranslationKey } from '@/lib/i18n';
+import { useLang } from '@/lib/useLang';
 import { AsideNav } from '@/components/AsideNav';
 
 export interface BlogPost {
@@ -49,28 +50,7 @@ function groupPostsByYearMonth(posts: BlogPost[]): YearGroup[] {
 }
 
 export function BlogHome({ posts }: { posts: BlogPost[] }) {
-  const [lang, setLang] = React.useState<Lang>('en');
-
-  React.useEffect(() => {
-    const storedLang = localStorage.getItem('lang');
-    if (storedLang === 'en' || storedLang === 'pt') {
-      setLang(storedLang);
-    }
-
-    const observer = new MutationObserver(() => {
-      const htmlLang = document.documentElement.lang;
-      if (htmlLang === 'en' || htmlLang === 'pt') {
-        setLang(htmlLang);
-      }
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['lang'],
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  const lang = useLang();
 
   const filtered = posts.filter((p) => p.lang === lang && !p.draft);
   const groups = groupPostsByYearMonth(filtered);
