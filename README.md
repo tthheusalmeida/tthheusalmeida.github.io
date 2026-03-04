@@ -2,269 +2,269 @@
 
 [![Deploy to GitHub Pages](https://github.com/tthheusalmeida/tthheusalmeida.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/tthheusalmeida/tthheusalmeida.github.io/actions/workflows/deploy.yml)
 
-Portfolio pessoal e blog desenvolvido com Astro, React e Tailwind CSS, com suporte para múltiplos idiomas (PT/EN) e funcionalidades avançadas de busca e navegação.
+Personal portfolio and blog developed with Astro, React, and Tailwind CSS, featuring multilingual support (PT/EN) and advanced search and navigation features.
 
-🌐 **[Ver site ao vivo](https://tthheusalmeida.github.io)**
+🌐 **[View live site](https://tthheusalmeida.github.io)**
 
-## 📋 Índice
+## 📋 Table of Contents
 
-- [Sobre o Projeto](#sobre-o-projeto)
-- [Funcionalidades](#funcionalidades)
-- [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Instalação e Configuração](#instalação-e-configuração)
-- [Comandos Disponíveis](#comandos-disponíveis)
-- [Desenvolvimento](#desenvolvimento)
-- [Testes](#testes)
-- [Deploy](#deploy)
-- [Licença](#licença)
+- [About the Project](#about-the-project)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Project Structure](#project-structure)
+- [Installation and Setup](#installation-and-setup)
+- [Available Commands](#available-commands)
+- [Development](#development)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [License](#license)
 
-## 🎯 Sobre o Projeto
+## 🎯 About the Project
 
-Este é um site pessoal e blog construído com tecnologias modernas da web. O projeto foi desenvolvido com foco em performance, acessibilidade e experiência do usuário, utilizando Astro como framework principal e React para componentes interativos.
+This is a personal website and blog built with modern web technologies. The project was developed with a focus on performance, accessibility, and user experience, using Astro as the main framework and React for interactive components.
 
-## ✨ Funcionalidades
+## ✨ Features
 
 ### Blog
-- 📝 **Sistema de blog completo** com suporte a Markdown
-- 🌍 **Suporte multilíngue** (Português e Inglês)
-- 🏷️ **Sistema de tags** para categorização de posts
-- 📅 **Organização por data** com estrutura de pastas por ano/mês/dia
-- 🔍 **Busca em tempo real** com índice de pesquisa otimizado
-- 📖 **Tempo de leitura estimado** para cada post
-- 📑 **Tabela de conteúdo (TOC)** gerada automaticamente
-- 🔗 **Posts relacionados** baseados em tags
-- 📰 **Feed RSS** para assinantes
-- 🗺️ **Sitemap** para SEO
+- 📝 **Complete blog system** with Markdown support
+- 🌍 **Multilingual support** (Portuguese and English)
+- 🏷️ **Tag system** for post categorization
+- 📅 **Date organization** with folder structure by year/month/day
+- 🔍 **Real-time search** with optimized search index
+- 📖 **Estimated reading time** for each post
+- 📑 **Table of contents (TOC)** automatically generated
+- 🔗 **Related posts** based on tags
+- 📰 **RSS feed** for subscribers
+- 🗺️ **Sitemap** for SEO
 
 ### Interface
-- 🎨 **Design system** baseado em shadcn/ui
-- 🌓 **Modo claro/escuro** com alternância suave
-- 📱 **Design responsivo** para todos os dispositivos
-- ♿ **Acessibilidade** seguindo as melhores práticas
-- 🎯 **Navegação lateral** com links para seções
-- 🔝 **Botão de scroll to top** para facilitar navegação
-- 🎨 **Highlight de código** com tema GitHub Dark
+- 🎨 **Design system** based on shadcn/ui
+- 🌓 **Light/dark mode** with smooth transitions
+- 📱 **Responsive design** for all devices
+- ♿ **Accessibility** following best practices
+- 🎯 **Sidebar navigation** with section links
+- 🔝 **Scroll to top button** for easier navigation
+- 🎨 **Code highlighting** with GitHub Dark theme
 
-### Internacionalização
-- 🌐 **Sistema de i18n completo** com traduções para PT/EN
-- 🔄 **Alternância de idioma** persistente
-- 📝 **Fallback automático** para posts não traduzidos
-- 🗓️ **Formatação de datas localizada**
+### Internationalization
+- 🌐 **Complete i18n system** with PT/EN translations
+- 🔄 **Persistent language toggle**
+- 📝 **Automatic fallback** for untranslated posts
+- 🗓️ **Localized date formatting**
 
-### Busca e Navegação
-- 🔎 **Barra de busca avançada** com filtros
-- 🏷️ **Busca por tags** e título
-- ⚡ **Performance otimizada** com índice pré-computado
-- 🎯 **Resultados relevantes** por idioma
+### Search and Navigation
+- 🔎 **Advanced search bar** with filters
+- 🏷️ **Search by tags** and title
+- ⚡ **Optimized performance** with pre-computed index
+- 🎯 **Relevant results** per language
 
-## 🛠 Tecnologias Utilizadas
+## 🛠 Technologies Used
 
 ### Core
-- **[Astro](https://astro.build/)** (v5.18.0) - Framework web para conteúdo
-- **[React](https://react.dev/)** (v18.3.1) - Biblioteca para componentes interativos
-- **[TypeScript](https://www.typescriptlang.org/)** - Tipagem estática
+- **[Astro](https://astro.build/)** (v5.18.0) - Web framework for content
+- **[React](https://react.dev/)** (v18.3.1) - Library for interactive components
+- **[TypeScript](https://www.typescriptlang.org/)** - Static typing
 
 ### Styling
-- **[Tailwind CSS](https://tailwindcss.com/)** (v3.4.13) - Framework CSS utility-first
-- **[shadcn/ui](https://ui.shadcn.com/)** - Componentes UI reutilizáveis
-- **[Lucide React](https://lucide.dev/)** - Ícones modernos
-- **[@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin)** - Estilos para conteúdo
+- **[Tailwind CSS](https://tailwindcss.com/)** (v3.4.13) - Utility-first CSS framework
+- **[shadcn/ui](https://ui.shadcn.com/)** - Reusable UI components
+- **[Lucide React](https://lucide.dev/)** - Modern icons
+- **[@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin)** - Content styles
 
-### Funcionalidades
-- **[Astro Content Collections](https://docs.astro.build/en/guides/content-collections/)** - Gerenciamento de conteúdo
-- **[Zod](https://zod.dev/)** - Validação de schemas
-- **[gray-matter](https://github.com/jonschlinkert/gray-matter)** - Parser de frontmatter
-- **[class-variance-authority](https://cva.style/)** - Variantes de componentes
-- **[clsx](https://github.com/lukeed/clsx)** & **[tailwind-merge](https://github.com/dcastil/tailwind-merge)** - Gerenciamento de classes CSS
+### Functionality
+- **[Astro Content Collections](https://docs.astro.build/en/guides/content-collections/)** - Content management
+- **[Zod](https://zod.dev/)** - Schema validation
+- **[gray-matter](https://github.com/jonschlinkert/gray-matter)** - Frontmatter parser
+- **[class-variance-authority](https://cva.style/)** - Component variants
+- **[clsx](https://github.com/lukeed/clsx)** & **[tailwind-merge](https://github.com/dcastil/tailwind-merge)** - CSS class management
 
-### Integrações Astro
-- **[@astrojs/react](https://docs.astro.build/en/guides/integrations-guide/react/)** - Integração React
-- **[@astrojs/tailwind](https://docs.astro.build/en/guides/integrations-guide/tailwind/)** - Integração Tailwind
-- **[@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)** - Geração de sitemap
-- **[@astrojs/rss](https://docs.astro.build/en/guides/rss/)** - Feed RSS
+### Astro Integrations
+- **[@astrojs/react](https://docs.astro.build/en/guides/integrations-guide/react/)** - React integration
+- **[@astrojs/tailwind](https://docs.astro.build/en/guides/integrations-guide/tailwind/)** - Tailwind integration
+- **[@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)** - Sitemap generation
+- **[@astrojs/rss](https://docs.astro.build/en/guides/rss/)** - RSS feed
 
-### Testes
-- **[Vitest](https://vitest.dev/)** (v4.0.18) - Framework de testes
-- **[@testing-library/react](https://testing-library.com/react)** - Testes de componentes React
-- **[@testing-library/jest-dom](https://testing-library.com/docs/ecosystem-jest-dom/)** - Matchers customizados
-- **[@testing-library/user-event](https://testing-library.com/docs/user-event/intro/)** - Simulação de interações
-- **[jsdom](https://github.com/jsdom/jsdom)** - Ambiente DOM para testes
+### Testing
+- **[Vitest](https://vitest.dev/)** (v4.0.18) - Testing framework
+- **[@testing-library/react](https://testing-library.com/react)** - React component testing
+- **[@testing-library/jest-dom](https://testing-library.com/docs/ecosystem-jest-dom/)** - Custom matchers
+- **[@testing-library/user-event](https://testing-library.com/docs/user-event/intro/)** - User interaction simulation
+- **[jsdom](https://github.com/jsdom/jsdom)** - DOM environment for testing
 
 ### DevOps
-- **GitHub Actions** - CI/CD automático
-- **GitHub Pages** - Hospedagem estática
+- **GitHub Actions** - Automated CI/CD
+- **GitHub Pages** - Static hosting
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure
 
 ```
 tthheusalmeida.github.io/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml           # Workflow de deploy automático
+│       └── deploy.yml           # Automatic deployment workflow
 ├── public/
-│   ├── favicon.ico             # Favicon do site
-│   └── favicon.svg             # Favicon vetorial
+│   ├── favicon.ico             # Site favicon
+│   └── favicon.svg             # Vector favicon
 ├── src/
-│   ├── components/             # Componentes React
-│   │   ├── ui/                # Componentes UI base (shadcn/ui)
+│   ├── components/             # React components
+│   │   ├── ui/                # Base UI components (shadcn/ui)
 │   │   │   └── button.tsx
-│   │   ├── AsideNav.tsx       # Navegação lateral
-│   │   ├── BlogFooter.tsx     # Rodapé do blog
-│   │   ├── BlogHome.tsx       # Página inicial do blog
-│   │   ├── BlogPostToc.tsx    # Tabela de conteúdo
-│   │   ├── Header.tsx         # Cabeçalho do site
-│   │   ├── RelatedPosts.tsx   # Posts relacionados
-│   │   └── SearchBar.tsx      # Barra de busca
-│   ├── content/               # Conteúdo do site
-│   │   ├── blog/             # Posts do blog organizados por data
+│   │   ├── AsideNav.tsx       # Sidebar navigation
+│   │   ├── BlogFooter.tsx     # Blog footer
+│   │   ├── BlogHome.tsx       # Blog home page
+│   │   ├── BlogPostToc.tsx    # Table of contents
+│   │   ├── Header.tsx         # Site header
+│   │   ├── RelatedPosts.tsx   # Related posts
+│   │   └── SearchBar.tsx      # Search bar
+│   ├── content/               # Site content
+│   │   ├── blog/             # Blog posts organized by date
 │   │   │   └── 2025/01/01/
 │   │   │       ├── welcome.en.md
 │   │   │       └── welcome.pt.md
-│   │   └── blog.test.ts      # Testes do schema
-│   ├── layouts/              # Layouts do site
-│   │   ├── BaseLayout.astro  # Layout base
-│   │   └── Layout.astro      # Layout de post
-│   ├── lib/                  # Utilitários e funções
-│   │   ├── i18n.ts          # Internacionalização
-│   │   ├── readingTime.ts   # Cálculo de tempo de leitura
-│   │   ├── relatedPosts.ts  # Lógica de posts relacionados
-│   │   ├── search.ts        # Busca de posts
-│   │   ├── searchIndex.ts   # Índice de busca
-│   │   ├── useLang.ts       # Hook de idioma
-│   │   └── utils.ts         # Utilitários gerais
-│   ├── pages/               # Páginas do site
+│   │   └── blog.test.ts      # Schema tests
+│   ├── layouts/              # Site layouts
+│   │   ├── BaseLayout.astro  # Base layout
+│   │   └── Layout.astro      # Post layout
+│   ├── lib/                  # Utilities and functions
+│   │   ├── i18n.ts          # Internationalization
+│   │   ├── readingTime.ts   # Reading time calculation
+│   │   ├── relatedPosts.ts  # Related posts logic
+│   │   ├── search.ts        # Post search
+│   │   ├── searchIndex.ts   # Search index
+│   │   ├── useLang.ts       # Language hook
+│   │   └── utils.ts         # General utilities
+│   ├── pages/               # Site pages
 │   │   ├── blog/
-│   │   │   └── [...slug].astro  # Página de post dinâmica
-│   │   ├── index.astro          # Página inicial
-│   │   └── rss.xml.ts          # Feed RSS
-│   ├── schemas/             # Schemas de validação
-│   │   └── blog.ts         # Schema do blog
-│   ├── styles/             # Estilos globais
-│   ├── test/               # Configuração de testes
-│   ├── content.config.ts   # Configuração de conteúdo
-│   └── env.d.ts           # Tipos TypeScript
-├── astro.config.mjs        # Configuração do Astro
-├── components.json         # Configuração do shadcn/ui
-├── package.json           # Dependências do projeto
-├── tailwind.config.mjs    # Configuração do Tailwind
-├── tsconfig.json         # Configuração do TypeScript
-├── vitest.config.ts      # Configuração de testes
-├── .gitignore           # Arquivos ignorados pelo Git
-├── LICENSE              # Licença MIT
-└── README.md           # Este arquivo
+│   │   │   └── [...slug].astro  # Dynamic post page
+│   │   ├── index.astro          # Home page
+│   │   └── rss.xml.ts          # RSS feed
+│   ├── schemas/             # Validation schemas
+│   │   └── blog.ts         # Blog schema
+│   ├── styles/             # Global styles
+│   ├── test/               # Test configuration
+│   ├── content.config.ts   # Content configuration
+│   └── env.d.ts           # TypeScript types
+├── astro.config.mjs        # Astro configuration
+├── components.json         # shadcn/ui configuration
+├── package.json           # Project dependencies
+├── tailwind.config.mjs    # Tailwind configuration
+├── tsconfig.json         # TypeScript configuration
+├── vitest.config.ts      # Testing configuration
+├── .gitignore           # Git ignored files
+├── LICENSE              # MIT License
+└── README.md           # This file
 ```
 
-## 🚀 Instalação e Configuração
+## 🚀 Installation and Setup
 
-### Pré-requisitos
+### Prerequisites
 
-- **Node.js** 20 ou superior
-- **npm** ou outro gerenciador de pacotes
+- **Node.js** 20 or higher
+- **npm** or another package manager
 
-### Passos para instalação
+### Installation steps
 
-1. Clone o repositório:
+1. Clone the repository:
 ```bash
 git clone https://github.com/tthheusalmeida/tthheusalmeida.github.io.git
 cd tthheusalmeida.github.io
 ```
 
-2. Instale as dependências:
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-3. Inicie o servidor de desenvolvimento:
+3. Start the development server:
 ```bash
 npm run dev
 ```
 
-4. Abra o navegador em `http://localhost:4321`
+4. Open your browser at `http://localhost:4321`
 
-## 📜 Comandos Disponíveis
+## 📜 Available Commands
 
-| Comando | Descrição |
+| Command | Description |
 |---------|-----------|
-| `npm run dev` | Inicia o servidor de desenvolvimento |
-| `npm run start` | Alias para `npm run dev` |
-| `npm run build` | Gera a build de produção em `dist/` |
-| `npm run preview` | Preview da build de produção localmente |
-| `npm test` | Executa todos os testes com Vitest |
+| `npm run dev` | Starts the development server |
+| `npm run start` | Alias for `npm run dev` |
+| `npm run build` | Generates production build in `dist/` |
+| `npm run preview` | Preview production build locally |
+| `npm test` | Runs all tests with Vitest |
 
-## 💻 Desenvolvimento
+## 💻 Development
 
-### Adicionando um Novo Post
+### Adding a New Post
 
-1. Crie um arquivo `.md` em `src/content/blog/YYYY/MM/DD/`
-2. Adicione o frontmatter:
+1. Create a `.md` file in `src/content/blog/YYYY/MM/DD/`
+2. Add the frontmatter:
 
 ```markdown
 ---
-title: "Título do Post"
+title: "Post Title"
 draft: false
-slug: "titulo-do-post"
+slug: "post-title"
 date: 2025-01-01
-lang: "pt"  # ou "en"
+lang: "en"  # or "pt"
 tags: ["tag1", "tag2"]
 ---
 
-Conteúdo do post em Markdown...
+Post content in Markdown...
 ```
 
-3. Para posts multilíngues, crie versões `.pt.md` e `.en.md`
+3. For multilingual posts, create `.pt.md` and `.en.md` versions
 
-### Adicionando Componentes UI
+### Adding UI Components
 
-Os componentes seguem o padrão do shadcn/ui. Para adicionar novos componentes:
+Components follow the shadcn/ui pattern. To add new components:
 
-1. Crie o componente em `src/components/ui/`
-2. Use as classes do Tailwind e CVA para variantes
-3. Exporte o componente
+1. Create the component in `src/components/ui/`
+2. Use Tailwind classes and CVA for variants
+3. Export the component
 
-### Testes
+### Testing
 
-Cada componente possui seu arquivo de teste correspondente (`.test.tsx` ou `.test.ts`). Os testes utilizam:
+Each component has its corresponding test file (`.test.tsx` or `.test.ts`). Tests use:
 
-- **Vitest** como test runner
-- **Testing Library** para testes de componentes
-- **jsdom** para ambiente de DOM
+- **Vitest** as test runner
+- **Testing Library** for component testing
+- **jsdom** for DOM environment
 
-Execute os testes com:
+Run tests with:
 ```bash
 npm test
 ```
 
-## 🚀 Deploy
+## 🚀 Deployment
 
-O projeto é automaticamente implantado no GitHub Pages através do GitHub Actions sempre que há um push para a branch `main`.
+The project is automatically deployed to GitHub Pages via GitHub Actions whenever there's a push to the `main` branch.
 
-### Workflow de Deploy
+### Deployment Workflow
 
-O arquivo `.github/workflows/deploy.yml` contém a configuração de CI/CD que:
+The `.github/workflows/deploy.yml` file contains the CI/CD configuration that:
 
-1. ✅ Faz checkout do código
-2. ⚙️ Configura Node.js 20
-3. 📦 Instala dependências
-4. 🏗️ Faz build do projeto
-5. 📤 Upload do artifact
-6. 🚀 Deploy no GitHub Pages
+1. ✅ Checks out the code
+2. ⚙️ Sets up Node.js 20
+3. 📦 Installs dependencies
+4. 🏗️ Builds the project
+5. 📤 Uploads the artifact
+6. 🚀 Deploys to GitHub Pages
 
-### Deploy Manual
+### Manual Deployment
 
-Você também pode fazer deploy manualmente:
+You can also deploy manually:
 
-1. Build do projeto:
+1. Build the project:
 ```bash
 npm run build
 ```
 
-2. O conteúdo estará em `dist/` pronto para ser servido
+2. The content will be in `dist/` ready to be served
 
-## 📝 Licença
+## 📝 License
 
-Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para detalhes.
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-**Desenvolvido por [Matheus Almeida](https://github.com/tthheusalmeida)** 💙
+**Developed by [Matheus Almeida](https://github.com/tthheusalmeida)** 💙
