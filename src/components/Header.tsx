@@ -43,11 +43,18 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between border-b border-border bg-background/80 px-6 py-3 backdrop-blur-sm">
-      <span className="text-lg font-bold text-foreground">tthheusalmeida</span>
+    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between border-b border-border bg-background/80 px-4 py-3 backdrop-blur-sm sm:px-6">
+      <a
+        href="https://almeida-matheus.com/"
+        className="text-lg font-bold text-foreground hover:text-foreground/80 transition-colors"
+        rel="noopener noreferrer"
+        aria-label="Visit Matheus Almeida's portfolio"
+      >
+        Matheus Almeida
+      </a>
 
-      <div className="flex items-center gap-2">
-        <Button variant="ghost" size="icon" onClick={cycleLang} aria-label="Toggle language">
+      <div className="flex items-center gap-1 sm:gap-2">
+        <Button variant="ghost" size="sm" onClick={cycleLang} aria-label="Toggle language" className="gap-1 px-3">
           <Globe className="h-5 w-5" />
           <span className="text-xs font-medium">{lang.toUpperCase()}</span>
         </Button>
