@@ -59,16 +59,16 @@ export function SearchBar({ searchIndex }: SearchBarProps) {
           aria-label={t(lang, 'search.label')}
           className="w-28 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none sm:w-40"
         />
-        {query && (
-          <button
-            type="button"
-            onClick={() => { setQuery(''); inputRef.current?.focus(); }}
-            aria-label={t(lang, 'search.clear')}
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <X className="h-4 w-4" />
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={() => { setQuery(''); inputRef.current?.focus(); }}
+          aria-label={t(lang, 'search.clear')}
+          aria-hidden={!query || undefined}
+          tabIndex={query ? 0 : -1}
+          className={`text-muted-foreground hover:text-foreground transition-colors ${!query ? 'invisible' : ''}`}
+        >
+          <X className="h-4 w-4" />
+        </button>
       </div>
 
       {open && (

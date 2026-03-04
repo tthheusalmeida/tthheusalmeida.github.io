@@ -164,7 +164,9 @@ describe('SearchBar', () => {
 
   it('does not show clear button when input is empty', () => {
     render(<SearchBar searchIndex={mockIndex} />);
-    expect(screen.queryByLabelText('Clear search')).not.toBeInTheDocument();
+    const clearBtn = screen.queryByLabelText('Clear search');
+    expect(clearBtn).toHaveAttribute('aria-hidden', 'true');
+    expect(clearBtn).toHaveAttribute('tabIndex', '-1');
   });
 
   it('shows clear button when input has text', async () => {
@@ -184,6 +186,6 @@ describe('SearchBar', () => {
     await user.click(screen.getByLabelText('Clear search'));
     expect(input).toHaveValue('');
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
-    expect(screen.queryByLabelText('Clear search')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Clear search')).toHaveAttribute('aria-hidden', 'true');
   });
 });
