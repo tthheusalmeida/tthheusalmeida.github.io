@@ -12,9 +12,10 @@ const posts = allPosts.map((entry) => ({
   lang: entry.data.lang,
   tags: entry.data.tags,
   draft: entry.data.draft,
+  href: `/blog/${entry.id.replace(/\.(en|pt)$/, '')}`,
 }));
 ---
 
-<BaseLayout title="Blog | tthheusalmeida">
+<BaseLayout title="Blog | Matheus Almeida">
   <BlogHome client:load posts={posts} />
 </BaseLayout>

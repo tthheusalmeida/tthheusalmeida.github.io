@@ -1,0 +1,196 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { RelatedPosts } from '../../components/RelatedPosts';
+import { BlogPostToc } from '../../components/BlogPostToc';
+import { calculateReadingTime } from '../../lib/readingTime';
+import { t } from '../../lib/i18n';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+
+  const groups = new Map<string, Map<string, (typeof allPosts)[number]>>();
+
+  for (const post of allPosts) {
+    if (post.data.draft) continue;
+    const canonicalSlug = post.id.replace(/\.(en|pt)$/, '');
+    if (!groups.has(canonicalSlug)) groups.set(canonicalSlug, new Map());
+    groups.get(canonicalSlug)!.set(post.data.lang, post);
+  }
+
+  const allPostsData = allPosts
+    .filter((p) => !p.data.draft)
+    .map((p) => ({
+      title: p.data.title,
+      slug: p.data.slug,
+      date: p.data.date.toISOString(),
+      lang: p.data.lang,
+      tags: p.data.tags,
+      href: `/blog/${p.id.replace(/\.(en|pt)$/, '')}`,
+      canonicalSlug: p.id.replace(/\.(en|pt)$/, ''),
+    }));
+
+  const paths = [];
+
+  for (const [canonicalSlug, langMap] of groups) {
+    paths.push({
+      params: { slug: canonicalSlug },
+      props: {
+        entries: Object.fromEntries(langMap),
+        allPostsData,
+        canonicalSlug,
+      },
+    });
+  }
+
+  return paths;
+}
+
+const { entries, allPostsData, canonicalSlug } = Astro.props;
+
+const variants: Record<
+  string,
+  {
+    Content: Awaited<ReturnType<typeof render>>['Content'];
+    data: (typeof entries)[string]['data'];
+    readingTime: number;
+  }
+> = {};
+
+for (const [lang, entry] of Object.entries(entries) as [
+  string,
+  (typeof entries)[string],
+][]) {
+  const { Content } = await render(entry);
+  variants[lang] = {
+    Content,
+    data: entry.data,
+    readingTime: calculateReadingTime(entry.body ?? ''),
+  };
+}
+
+const availableLangs = Object.keys(variants);
+const defaultTitle =
+  variants.en?.data.title ?? variants.pt?.data.title ?? 'Post';
+
+const i18nBackLink = {
+  en: t('en', 'post.backToBlog'),
+  pt: t('pt', 'post.backToBlog'),
+};
+---
+
+<BaseLayout title={`${defaultTitle} | Matheus Almeida`}>
+  <div class="mx-auto flex max-w-5xl gap-8 px-4 py-8 sm:px-6">
+    <div class="min-w-0 flex-1">
+      <a
+        href="/"
+        class="mb-6 inline-block text-sm text-muted-foreground transition-colors hover:text-foreground"
+        data-back-link
+      >
+        {t('en', 'post.backToBlog')}
+      </a>
+
+      {
+        Object.entries(variants).map(([lang, { Content, data, readingTime }]) => (
+          <article
+            data-lang-content={lang}
+            style="display:none"
+            class="post-article"
+          >
+            <header class="mb-16 text-center">
+              <h1 class="text-3xl font-bold text-foreground">{data.title}</h1>
+              <div class="mt-2 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                <time datetime={data.date.toISOString()}>
+                  {data.date.toLocaleDateString(
+                    lang === 'pt' ? 'pt-BR' : 'en-US',
+                    { day: '2-digit', month: 'long', year: 'numeric' },
+                  )}
+                </time>
+                <span>·</span>
+                <span data-reading-time>
+                  {readingTime}{' '}
+                  {t(lang as 'en' | 'pt', 'post.minRead')}
+                </span>
+              </div>
+            </header>
+            <div class="prose dark:prose-invert max-w-none">
+              <Content />
+            </div>
+            <div class="mt-10 flex flex-wrap justify-center gap-2">
+              {data.tags.map((tag: string) => (
+                <span class="rounded bg-accent px-2 py-0.5 text-xs text-accent-foreground">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </article>
+        ))
+      }
+
+      <div
+        id="fallback-warning"
+        style="display:none"
+        class="mt-4 rounded-md border border-border bg-accent/50 px-4 py-2 text-sm text-muted-foreground"
+        role="alert"
+      >
+        <span data-fallback-text="en"
+          >{t('en', 'post.fallbackWarning')}</span
+        >
+        <span data-fallback-text="pt" style="display:none"
+          >{t('pt', 'post.fallbackWarning')}</span
+        >
+      </div>
+
+      <RelatedPosts
+        client:load
+        canonicalSlug={canonicalSlug}
+        allPosts={allPostsData}
+      />
+    </div>
+
+    <BlogPostToc client:load />
+  </div>
+
+  <script
+    is:inline
+    define:vars={{ availableLangs, i18nBackLink }}
+  >
+    (function () {
+      function update() {
+        var lang = localStorage.getItem('lang') || 'en';
+
+        var hasLang = availableLangs.indexOf(lang) !== -1;
+        var displayLang = hasLang ? lang : availableLangs[0];
+
+        var articles = document.querySelectorAll('[data-lang-content]');
+        articles.forEach(function (el) {
+          el.style.display =
+            el.getAttribute('data-lang-content') === displayLang
+              ? 'block'
+              : 'none';
+        });
+
+        var fallback = document.getElementById('fallback-warning');
+        if (fallback) {
+          fallback.style.display = hasLang ? 'none' : 'block';
+          fallback.querySelectorAll('[data-fallback-text]').forEach(function (el) {
+            el.style.display =
+              el.getAttribute('data-fallback-text') === lang ? 'inline' : 'none';
+          });
+        }
+
+        var backLink = document.querySelector('[data-back-link]');
+        if (backLink) {
+          backLink.textContent = i18nBackLink[lang] || i18nBackLink['en'];
+        }
+      }
+
+      update();
+
+      new MutationObserver(update).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['lang'],
+      });
+    })();
+  </script>
+</BaseLayout>

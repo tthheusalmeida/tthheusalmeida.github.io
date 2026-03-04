@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Moon, Sun, Globe, ArrowRight } from 'lucide-react';
+import { Moon, Sun, Globe, ArrowRight, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { t, type Lang } from '@/lib/i18n';
+import { useLang } from '@/lib/useLang';
 
 const LANGUAGES: { code: Lang; label: string }[] = [
   { code: 'en', label: 'EN' },
@@ -10,7 +11,7 @@ const LANGUAGES: { code: Lang; label: string }[] = [
 
 export function Header() {
   const [dark, setDark] = React.useState(false);
-  const [lang, setLang] = React.useState<Lang>('en');
+  const lang = useLang();
 
   React.useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
@@ -19,11 +20,6 @@ export function Header() {
         (!storedTheme &&
           window.matchMedia('(prefers-color-scheme: dark)').matches),
     );
-
-    const storedLang = localStorage.getItem('lang');
-    if (storedLang === 'en' || storedLang === 'pt') {
-      setLang(storedLang);
-    }
   }, []);
 
   const toggleTheme = () => {
@@ -36,7 +32,6 @@ export function Header() {
   const cycleLang = () => {
     const idx = LANGUAGES.findIndex((l) => l.code === lang);
     const next = LANGUAGES[(idx + 1) % LANGUAGES.length];
-    setLang(next.code);
     document.documentElement.lang = next.code;
     localStorage.setItem('lang', next.code);
   };
@@ -52,7 +47,7 @@ export function Header() {
       </a>
 
       <div className="flex items-center gap-1 sm:gap-2">
-        <Button asChild size="sm" className="gap-1">
+        <Button asChild size="sm" className="min-w-[6rem] gap-1">
           <a
             href="https://almeida-matheus.com"
             target="_blank"
@@ -63,7 +58,19 @@ export function Header() {
           </a>
         </Button>
 
-        <Button variant="ghost" size="sm" onClick={cycleLang} aria-label={t(lang, 'header.toggleLanguage')} className="gap-1 px-3">
+        <Button asChild variant="ghost" size="icon" aria-label={t(lang, 'header.github')}>
+          <a
+            href="https://github.com/tthheusalmeida"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Github className="h-5 w-5" />
+          </a>
+        </Button>
+
+        <span className="mx-1 h-5 w-px bg-border" aria-hidden="true" />
+
+        <Button variant="ghost" size="sm" onClick={cycleLang} aria-label={t(lang, 'header.toggleLanguage')} className="min-w-[3.5rem] gap-1 px-3">
           <Globe className="h-5 w-5" />
           <span className="text-xs font-medium">{lang.toUpperCase()}</span>
         </Button>

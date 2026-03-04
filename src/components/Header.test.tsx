@@ -59,7 +59,30 @@ describe('Header', () => {
     expect(portfolioLink).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
-  it('renders language toggle button with proper padding (size="sm")', () => {
+  it('renders a GitHub icon-only button linking to GitHub profile', () => {
+    render(<Header />);
+    const githubLink = screen.getByLabelText('GitHub profile');
+    expect(githubLink).toBeInTheDocument();
+    expect(githubLink).toHaveAttribute('href', 'https://github.com/tthheusalmeida');
+    expect(githubLink).toHaveAttribute('target', '_blank');
+    expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+
+  it('renders a vertical separator between navigation groups', () => {
+    render(<Header />);
+    const separator = document.querySelector('[aria-hidden="true"]');
+    expect(separator).toBeInTheDocument();
+    expect(separator?.className).toContain('bg-border');
+  });
+
+  it('renders Portfolio button with min-width to prevent resize', () => {
+    render(<Header />);
+    const portfolioLink = screen.getByRole('link', { name: 'Portfolio' });
+    const button = portfolioLink.closest('[class*="min-w"]') ?? portfolioLink;
+    expect(button.className).toContain('min-w-');
+  });
+
+  it('renders language toggle button with min-width and proper padding', () => {
     render(<Header />);
     const langButton = screen.getByLabelText('Toggle language');
     expect(langButton).toBeInTheDocument();
