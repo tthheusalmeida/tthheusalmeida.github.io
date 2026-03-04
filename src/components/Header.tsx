@@ -3,13 +3,19 @@ import { Moon, Sun, Globe, ArrowRight, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { t, type Lang } from '@/lib/i18n';
 import { useLang } from '@/lib/useLang';
+import { SearchBar } from '@/components/SearchBar';
+import type { SearchIndex } from '@/lib/searchIndex';
 
 const LANGUAGES: { code: Lang; label: string }[] = [
   { code: 'en', label: 'EN' },
   { code: 'pt', label: 'PT' },
 ];
 
-export function Header() {
+export interface HeaderProps {
+  searchIndex?: SearchIndex;
+}
+
+export function Header({ searchIndex }: HeaderProps) {
   const [dark, setDark] = React.useState(false);
   const lang = useLang();
 
@@ -45,6 +51,12 @@ export function Header() {
       >
         {t(lang, 'header.name')}
       </a>
+
+      {searchIndex && (
+        <div className="flex-1 flex justify-center px-4">
+          <SearchBar searchIndex={searchIndex} />
+        </div>
+      )}
 
       <div className="flex items-center gap-1 sm:gap-2">
         <Button asChild size="sm" className="min-w-[6rem] gap-1">

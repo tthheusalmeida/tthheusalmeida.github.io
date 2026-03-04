@@ -5,6 +5,7 @@ import { RelatedPosts } from '../../components/RelatedPosts';
 import { BlogPostToc } from '../../components/BlogPostToc';
 import { calculateReadingTime } from '../../lib/readingTime';
 import { t } from '../../lib/i18n';
+import { buildSearchIndex, toRawPosts } from '../../lib/searchIndex';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
@@ -30,6 +31,8 @@ export async function getStaticPaths() {
       canonicalSlug: p.id.replace(/\.(en|pt)$/, ''),
     }));
 
+  const searchIndex = buildSearchIndex(toRawPosts(allPosts));
+
   const paths = [];
 
   for (const [canonicalSlug, langMap] of groups) {
@@ -39,6 +42,7 @@ export async function getStaticPaths() {
         entries: Object.fromEntries(langMap),
         allPostsData,
         canonicalSlug,
+        searchIndex,
       },
     });
   }
@@ -46,7 +50,7 @@ export async function getStaticPaths() {
   return paths;
 }
 
-const { entries, allPostsData, canonicalSlug } = Astro.props;
+const { entries, allPostsData, canonicalSlug, searchIndex } = Astro.props;
 
 const variants: Record<
   string,
@@ -79,7 +83,7 @@ const i18nBackLink = {
 };
 ---
 
-<BaseLayout title={`${defaultTitle} | Matheus Almeida`}>
+<BaseLayout title={`${defaultTitle} | Matheus Almeida`} searchIndex={searchIndex}>
   <div class="mx-auto flex max-w-5xl gap-8 px-4 py-8 sm:px-6">
     <div class="min-w-0 flex-1">
       <a

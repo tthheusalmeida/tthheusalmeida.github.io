@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { BlogHome } from '../components/BlogHome';
+import { buildSearchIndex, toRawPosts } from '../lib/searchIndex';
 
 const allPosts = await getCollection('blog');
 
@@ -14,8 +15,10 @@ const posts = allPosts.map((entry) => ({
   draft: entry.data.draft,
   href: `/blog/${entry.id.replace(/\.(en|pt)$/, '')}`,
 }));
+
+const searchIndex = buildSearchIndex(toRawPosts(allPosts));
 ---
 
-<BaseLayout title="Blog | Matheus Almeida">
+<BaseLayout title="Blog | Matheus Almeida" searchIndex={searchIndex}>
   <BlogHome client:load posts={posts} />
 </BaseLayout>
