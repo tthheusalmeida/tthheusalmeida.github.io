@@ -24,4 +24,18 @@ describe('i18n', () => {
   it('returns translated toggle language label in Portuguese', () => {
     expect(t('pt', 'header.toggleLanguage')).toBe('Alternar idioma');
   });
+
+  it('returns toc.title in sentence case for EN', () => {
+    const title = t('en', 'toc.title');
+    expect(title).toBe('Page contents');
+    expect(title[0]).toBe(title[0].toUpperCase());
+    expect(title.slice(1)).not.toBe(title.slice(1).toUpperCase());
+  });
+
+  it('returns toc.title in sentence case for PT', () => {
+    const title = t('pt', 'toc.title');
+    expect(title).toBe('Conteúdo desta página');
+    expect(title[0]).toBe(title[0].toUpperCase());
+    expect(title.slice(1)).not.toBe(title.slice(1).toUpperCase());
+  });
 });
