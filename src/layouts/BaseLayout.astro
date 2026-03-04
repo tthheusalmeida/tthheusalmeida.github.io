@@ -1,0 +1,43 @@
+---
+import '../styles/globals.css';
+import { Header } from '../components/Header';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Tthheusalmeida portfolio" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <script is:inline>
+      (function () {
+        var theme = localStorage.getItem('theme');
+        if (
+          theme === 'dark' ||
+          (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ) {
+          document.documentElement.classList.add('dark');
+        }
+        var lang = localStorage.getItem('lang');
+        if (lang) {
+          document.documentElement.lang = lang;
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <Header client:load />
+    <main class="pt-14">
+      <slot />
+    </main>
+  </body>
+</html>
