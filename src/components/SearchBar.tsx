@@ -65,7 +65,7 @@ export function SearchBar({ searchIndex }: SearchBarProps) {
         <div
           role="listbox"
           aria-label={t(lang, 'search.label')}
-          className="absolute right-0 top-full z-50 mt-1 max-h-80 w-72 overflow-y-auto rounded-md border border-border bg-popover shadow-lg sm:w-80"
+          className="absolute left-1/2 top-full z-50 mt-1 max-h-80 min-w-[20rem] -translate-x-1/2 overflow-y-auto rounded-md border border-border bg-popover shadow-lg"
         >
           {results.length === 0 ? (
             <p className="p-3 text-sm text-muted-foreground">
@@ -80,7 +80,7 @@ export function SearchBar({ searchIndex }: SearchBarProps) {
                 aria-selected={false}
                 className="flex flex-col gap-1 border-b border-border px-3 py-2 last:border-b-0 hover:bg-accent transition-colors"
               >
-                <span className="text-sm font-medium text-foreground">
+                <span className="text-sm font-medium text-foreground break-words">
                   {entry.title}
                 </span>
                 <span className="flex gap-1 flex-wrap">
