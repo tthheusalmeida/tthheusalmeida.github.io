@@ -60,3 +60,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Code syntax highlighting */
+.prose pre {
+  @apply overflow-x-auto rounded-lg border border-border;
+}
+
+.prose :not(pre) > code {
+  @apply rounded border border-border bg-muted px-1.5 py-0.5 text-sm;
+}
+
+.prose pre > code {
+  @apply border-0 bg-transparent p-0;
+}

@@ -90,10 +90,16 @@ export function BlogHome({ posts }: { posts: BlogPost[] }) {
                         >
                           <a
                             href={post.href}
-                            className="flex items-baseline justify-between gap-4 rounded-md border border-border p-3 transition-colors hover:bg-accent"
+                            className="flex items-center justify-between gap-4 rounded-md border border-border p-3 transition-colors hover:bg-accent"
                           >
-                            <span className="font-medium text-foreground">
+                            <span className="flex items-center gap-2 font-medium text-foreground">
                               {post.title}
+                              <span
+                                className="inline-flex shrink-0 items-center rounded-full border border-border px-1.5 py-0.5 text-[10px] font-medium uppercase leading-none text-muted-foreground"
+                                title={post.lang === 'pt' ? 'Português' : 'English'}
+                              >
+                                {post.lang === 'pt' ? '🇧🇷 PT' : '🇺🇸 EN'}
+                              </span>
                             </span>
                             <time
                               className="shrink-0 text-sm text-muted-foreground"

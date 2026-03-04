@@ -81,9 +81,27 @@ const i18nBackLink = {
   en: t('en', 'post.backToBlog'),
   pt: t('pt', 'post.backToBlog'),
 };
+
+const siteUrl = 'https://tthheusalmeida.github.io';
+const hreflangs = availableLangs.map((lang) => ({
+  lang,
+  href: `${siteUrl}/blog/${canonicalSlug}/`,
+}));
 ---
 
-<BaseLayout title={`${defaultTitle} | Matheus Almeida`} searchIndex={searchIndex}>
+<BaseLayout title={`${defaultTitle} | Matheus Almeida`} searchIndex={searchIndex} hreflangs={hreflangs}>
+  <!-- Reading progress bar -->
+  <div
+    id="reading-progress"
+    class="fixed top-[57px] left-0 z-40 h-1 bg-primary transition-[width] duration-150 ease-out"
+    style="width:0%"
+    role="progressbar"
+    aria-label="Reading progress"
+    aria-valuenow="0"
+    aria-valuemin="0"
+    aria-valuemax="100"
+  ></div>
+
   <div class="mx-auto flex max-w-5xl gap-8 px-4 py-8 sm:px-6">
     <div class="min-w-0 flex-1">
       <a
@@ -104,6 +122,13 @@ const i18nBackLink = {
             <header class="mb-16 text-center">
               <h1 class="text-3xl font-bold text-foreground">{data.title}</h1>
               <div class="mt-2 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                <span
+                  class="inline-flex items-center rounded-full border border-border px-2 py-0.5 text-xs font-medium uppercase text-muted-foreground"
+                  title={lang === 'pt' ? 'Português' : 'English'}
+                >
+                  {lang === 'pt' ? '🇧🇷 PT' : '🇺🇸 EN'}
+                </span>
+                <span>·</span>
                 <time datetime={data.date.toISOString()}>
                   {data.date.toLocaleDateString(
                     lang === 'pt' ? 'pt-BR' : 'en-US',
@@ -195,6 +220,24 @@ const i18nBackLink = {
         attributes: true,
         attributeFilter: ['lang'],
       });
+    })();
+  </script>
+
+  <script is:inline>
+    (function () {
+      var bar = document.getElementById('reading-progress');
+      if (!bar) return;
+
+      function updateProgress() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+        bar.style.width = progress + '%';
+        bar.setAttribute('aria-valuenow', String(Math.round(progress)));
+      }
+
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
     })();
   </script>
 </BaseLayout>
