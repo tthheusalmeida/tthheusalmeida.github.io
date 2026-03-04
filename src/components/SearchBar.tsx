@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Search } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 import { t, type Lang } from '@/lib/i18n';
 import { useLang } from '@/lib/useLang';
 import { searchPosts } from '@/lib/search';
@@ -59,6 +59,16 @@ export function SearchBar({ searchIndex }: SearchBarProps) {
           aria-label={t(lang, 'search.label')}
           className="w-28 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none sm:w-40"
         />
+        {query && (
+          <button
+            type="button"
+            onClick={() => { setQuery(''); inputRef.current?.focus(); }}
+            aria-label={t(lang, 'search.clear')}
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        )}
       </div>
 
       {open && (
