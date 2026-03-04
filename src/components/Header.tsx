@@ -3,13 +3,19 @@ import { Moon, Sun, Globe, ArrowRight, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { t, type Lang } from '@/lib/i18n';
 import { useLang } from '@/lib/useLang';
+import { SearchBar } from '@/components/SearchBar';
+import type { SearchIndex } from '@/lib/searchIndex';
 
 const LANGUAGES: { code: Lang; label: string }[] = [
   { code: 'en', label: 'EN' },
   { code: 'pt', label: 'PT' },
 ];
 
-export function Header() {
+export interface HeaderProps {
+  searchIndex?: SearchIndex;
+}
+
+export function Header({ searchIndex }: HeaderProps) {
   const [dark, setDark] = React.useState(false);
   const lang = useLang();
 
@@ -67,6 +73,10 @@ export function Header() {
             <Github className="h-5 w-5" />
           </a>
         </Button>
+
+        <span className="mx-1 h-5 w-px bg-border" aria-hidden="true" />
+
+        {searchIndex && <SearchBar searchIndex={searchIndex} />}
 
         <span className="mx-1 h-5 w-px bg-border" aria-hidden="true" />
 
