@@ -37,14 +37,12 @@ describe('Header', () => {
     document.documentElement.lang = 'en';
   });
 
-  it('renders "Matheus Almeida" as a link to the portfolio', () => {
+  it('renders "Matheus Almeida" as a link to the deploy page', () => {
     render(<Header />);
     const link = screen.getByText('Matheus Almeida');
     expect(link).toBeInTheDocument();
     expect(link.tagName).toBe('A');
-    expect(link).toHaveAttribute('href', 'https://almeida-matheus.com/');
-    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
-    expect(link).toHaveAttribute('aria-label', "Visit Matheus Almeida's portfolio");
+    expect(link).toHaveAttribute('href', 'https://tthheusalmeida.github.io/');
   });
 
   it('does not render "tthheusalmeida" text', () => {
@@ -52,11 +50,19 @@ describe('Header', () => {
     expect(screen.queryByText('tthheusalmeida')).not.toBeInTheDocument();
   });
 
+  it('renders a highlighted Portfolio button linking to almeida-matheus.com', () => {
+    render(<Header />);
+    const portfolioLink = screen.getByRole('link', { name: 'Portfolio' });
+    expect(portfolioLink).toBeInTheDocument();
+    expect(portfolioLink).toHaveAttribute('href', 'https://almeida-matheus.com');
+    expect(portfolioLink).toHaveAttribute('target', '_blank');
+    expect(portfolioLink).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+
   it('renders language toggle button with proper padding (size="sm")', () => {
     render(<Header />);
     const langButton = screen.getByLabelText('Toggle language');
     expect(langButton).toBeInTheDocument();
-    // size="sm" adds px-3 class giving proper padding instead of icon size
     expect(langButton.className).toContain('px-3');
   });
 
@@ -93,5 +99,36 @@ describe('Header', () => {
   it('renders theme toggle button', () => {
     render(<Header />);
     expect(screen.getByLabelText('Switch to dark mode')).toBeInTheDocument();
+  });
+
+  describe('i18n', () => {
+    it('translates Portfolio button text to PT after language switch', async () => {
+      const user = userEvent.setup();
+      render(<Header />);
+      // Initially in EN
+      expect(screen.getByRole('link', { name: 'Portfolio' })).toHaveTextContent('Portfolio');
+      // Switch to PT
+      const langButton = screen.getByLabelText('Toggle language');
+      await user.click(langButton);
+      expect(screen.getByRole('link', { name: 'Portfólio' })).toHaveTextContent('Portfólio');
+    });
+
+    it('translates theme toggle aria-label to PT after language switch', async () => {
+      const user = userEvent.setup();
+      render(<Header />);
+      expect(screen.getByLabelText('Switch to dark mode')).toBeInTheDocument();
+      const langButton = screen.getByLabelText('Toggle language');
+      await user.click(langButton);
+      expect(screen.getByLabelText('Mudar para modo escuro')).toBeInTheDocument();
+    });
+
+    it('translates language toggle aria-label to PT after language switch', async () => {
+      const user = userEvent.setup();
+      render(<Header />);
+      expect(screen.getByLabelText('Toggle language')).toBeInTheDocument();
+      const langButton = screen.getByLabelText('Toggle language');
+      await user.click(langButton);
+      expect(screen.getByLabelText('Alternar idioma')).toBeInTheDocument();
+    });
   });
 });

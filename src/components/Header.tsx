@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { Moon, Sun, Globe } from 'lucide-react';
+import { Moon, Sun, Globe, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { t, type Lang } from '@/lib/i18n';
 
-const LANGUAGES = [
+const LANGUAGES: { code: Lang; label: string }[] = [
   { code: 'en', label: 'EN' },
   { code: 'pt', label: 'PT' },
-] as const;
-
-type Lang = (typeof LANGUAGES)[number]['code'];
+];
 
 export function Header() {
   const [dark, setDark] = React.useState(false);
@@ -45,21 +44,31 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between border-b border-border bg-background/80 px-4 py-3 backdrop-blur-sm sm:px-6">
       <a
-        href="https://almeida-matheus.com/"
+        href="https://tthheusalmeida.github.io/"
         className="text-lg font-bold text-foreground hover:text-foreground/80 transition-colors"
-        rel="noopener noreferrer"
-        aria-label="Visit Matheus Almeida's portfolio"
+        aria-label={t(lang, 'header.visitPortfolio')}
       >
-        Matheus Almeida
+        {t(lang, 'header.name')}
       </a>
 
       <div className="flex items-center gap-1 sm:gap-2">
-        <Button variant="ghost" size="sm" onClick={cycleLang} aria-label="Toggle language" className="gap-1 px-3">
+        <Button asChild size="sm" className="gap-1">
+          <a
+            href="https://almeida-matheus.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t(lang, 'header.portfolio')}
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </Button>
+
+        <Button variant="ghost" size="sm" onClick={cycleLang} aria-label={t(lang, 'header.toggleLanguage')} className="gap-1 px-3">
           <Globe className="h-5 w-5" />
           <span className="text-xs font-medium">{lang.toUpperCase()}</span>
         </Button>
 
-        <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}>
+        <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label={dark ? t(lang, 'header.switchToLight') : t(lang, 'header.switchToDark')}>
           {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         </Button>
       </div>
