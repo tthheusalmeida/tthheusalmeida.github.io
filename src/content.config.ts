@@ -3,7 +3,11 @@ import { glob } from 'astro/loaders';
 import { blogSchema } from './schemas/blog';
 
 const blog = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
+  loader: glob({
+    pattern: '**/*.md',
+    base: './src/content/blog',
+    generateId: ({ entry }) => entry.replace(/\.md$/, ''),
+  }),
   schema: blogSchema,
 });
 

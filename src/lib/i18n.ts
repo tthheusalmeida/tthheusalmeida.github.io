@@ -14,6 +14,11 @@ export const translations = {
     'blog.recentPosts': 'Recent Posts',
     'blog.noPosts': 'No posts found.',
     'blog.scrollToTop': 'Scroll to top',
+    'post.minRead': 'min read',
+    'post.backToBlog': '← Back to blog',
+    'post.relatedPosts': 'Related Posts',
+    'post.fallbackWarning':
+      'This post is not available in your language. Showing fallback.',
     'month.01': 'January',
     'month.02': 'February',
     'month.03': 'March',
@@ -42,6 +47,11 @@ export const translations = {
     'blog.recentPosts': 'Posts Recentes',
     'blog.noPosts': 'Nenhum post encontrado.',
     'blog.scrollToTop': 'Voltar ao topo',
+    'post.minRead': 'min de leitura',
+    'post.backToBlog': '← Voltar ao blog',
+    'post.relatedPosts': 'Posts Relacionados',
+    'post.fallbackWarning':
+      'Este post não está disponível no seu idioma. Exibindo alternativa.',
     'month.01': 'Janeiro',
     'month.02': 'Fevereiro',
     'month.03': 'Março',

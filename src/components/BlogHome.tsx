@@ -9,6 +9,7 @@ export interface BlogPost {
   lang: string;
   tags: string[];
   draft: boolean;
+  href: string;
 }
 
 interface YearGroup {
@@ -106,20 +107,24 @@ export function BlogHome({ posts }: { posts: BlogPost[] }) {
                       {monthPosts.map((post) => (
                         <li
                           key={post.slug}
-                          className="flex items-baseline justify-between gap-4 rounded-md border border-border p-3 transition-colors hover:bg-accent"
                         >
-                          <span className="font-medium text-foreground">
-                            {post.title}
-                          </span>
-                          <time
-                            className="shrink-0 text-sm text-muted-foreground"
-                            dateTime={post.date}
+                          <a
+                            href={post.href}
+                            className="flex items-baseline justify-between gap-4 rounded-md border border-border p-3 transition-colors hover:bg-accent"
                           >
-                            {new Date(post.date).toLocaleDateString(
-                              lang === 'pt' ? 'pt-BR' : 'en-US',
-                              { day: '2-digit', month: 'short', year: 'numeric' },
-                            )}
-                          </time>
+                            <span className="font-medium text-foreground">
+                              {post.title}
+                            </span>
+                            <time
+                              className="shrink-0 text-sm text-muted-foreground"
+                              dateTime={post.date}
+                            >
+                              {new Date(post.date).toLocaleDateString(
+                                lang === 'pt' ? 'pt-BR' : 'en-US',
+                                { day: '2-digit', month: 'short', year: 'numeric' },
+                              )}
+                            </time>
+                          </a>
                         </li>
                       ))}
                     </ul>

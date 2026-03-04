@@ -26,6 +26,7 @@ const samplePosts: BlogPost[] = [
     lang: 'en',
     tags: ['welcome'],
     draft: false,
+    href: '/blog/2025/01/01/welcome',
   },
   {
     title: 'Learning Astro',
@@ -34,6 +35,7 @@ const samplePosts: BlogPost[] = [
     lang: 'en',
     tags: ['astro'],
     draft: false,
+    href: '/blog/2025/01/02/learning-astro',
   },
   {
     title: 'Bem-vindo ao meu blog',
@@ -42,6 +44,7 @@ const samplePosts: BlogPost[] = [
     lang: 'pt',
     tags: ['welcome'],
     draft: false,
+    href: '/blog/2025/01/01/welcome',
   },
   {
     title: 'Aprendendo Astro',
@@ -50,6 +53,7 @@ const samplePosts: BlogPost[] = [
     lang: 'pt',
     tags: ['astro'],
     draft: false,
+    href: '/blog/2025/01/02/learning-astro',
   },
   {
     title: 'Draft Post',
@@ -58,6 +62,7 @@ const samplePosts: BlogPost[] = [
     lang: 'en',
     tags: [],
     draft: true,
+    href: '/blog/2025/02/01/draft-post',
   },
 ];
 
@@ -138,5 +143,12 @@ describe('BlogHome', () => {
     render(<BlogHome posts={samplePosts} />);
     const monthSection = document.getElementById('year-2025-month-01');
     expect(monthSection).toBeInTheDocument();
+  });
+
+  it('renders post titles as links to individual post pages', () => {
+    render(<BlogHome posts={samplePosts} />);
+    const link = screen.getByText('Welcome to my blog').closest('a');
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute('href', '/blog/2025/01/01/welcome');
   });
 });
