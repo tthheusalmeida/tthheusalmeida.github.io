@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { BlogHome } from '../components/BlogHome';
-import { BlogFooter } from '../components/BlogFooter';
 
 const allPosts = await getCollection('blog');
 
@@ -19,7 +18,4 @@ const posts = allPosts.map((entry) => ({
 
 <BaseLayout title="Blog | Matheus Almeida">
   <BlogHome client:load posts={posts} />
-  <div class="mx-auto max-w-5xl px-4 sm:px-6">
-    <BlogFooter client:load />
-  </div>
 </BaseLayout>

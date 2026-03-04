@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { t, type Lang } from '@/lib/i18n';
+import { useLang } from '@/lib/useLang';
 
 interface TocItem {
   id: string;
@@ -9,6 +11,7 @@ interface TocItem {
 export function BlogPostToc() {
   const [headings, setHeadings] = React.useState<TocItem[]>([]);
   const [activeId, setActiveId] = React.useState<string>('');
+  const lang = useLang();
 
   React.useEffect(() => {
     function collectHeadings() {
@@ -85,6 +88,9 @@ export function BlogPostToc() {
   return (
     <aside className="hidden w-48 shrink-0 xl:block">
       <nav className="sticky top-20 space-y-1" aria-label="Table of contents">
+        <span className="mb-2 block text-xs font-medium uppercase tracking-wide text-muted-foreground/70">
+          {t(lang, 'toc.title')}
+        </span>
         {headings.map(({ id, text, level }) => (
           <a
             key={id}

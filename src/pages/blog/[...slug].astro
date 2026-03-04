@@ -3,7 +3,6 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { RelatedPosts } from '../../components/RelatedPosts';
 import { BlogPostToc } from '../../components/BlogPostToc';
-import { BlogFooter } from '../../components/BlogFooter';
 import { calculateReadingTime } from '../../lib/readingTime';
 import { t } from '../../lib/i18n';
 
@@ -117,10 +116,7 @@ const i18nBackLink = {
             <div class="prose dark:prose-invert max-w-none">
               <Content />
             </div>
-            <div class="mt-10 flex items-center justify-center gap-2 text-muted-foreground">
-              <span>-//- </span>
-            </div>
-            <div class="mt-4 flex flex-wrap gap-2">
+            <div class="mt-10 flex flex-wrap gap-2">
               {data.tags.map((tag: string) => (
                 <span class="rounded bg-accent px-2 py-0.5 text-xs text-accent-foreground">
                   {tag}
@@ -150,8 +146,6 @@ const i18nBackLink = {
         canonicalSlug={canonicalSlug}
         allPosts={allPostsData}
       />
-
-      <BlogFooter client:load />
     </div>
 
     <BlogPostToc client:load />
