@@ -34,7 +34,6 @@ const mockIndex: SearchIndex = {
       title: 'Welcome to my blog',
       slug: 'welcome',
       tags: ['welcome', 'introduction'],
-      content: 'This is the first post on my blog.',
       href: '/blog/2025/01/01/welcome',
       date: '2025-01-01T00:00:00.000Z',
     },
@@ -42,7 +41,6 @@ const mockIndex: SearchIndex = {
       title: 'Learning Astro',
       slug: 'learning-astro',
       tags: ['astro', 'web development'],
-      content: 'Astro is a great framework for building static sites.',
       href: '/blog/2025/01/02/learning-astro',
       date: '2025-01-02T00:00:00.000Z',
     },
@@ -52,7 +50,6 @@ const mockIndex: SearchIndex = {
       title: 'Bem-vindo ao meu blog',
       slug: 'bem-vindo',
       tags: ['bem-vindo', 'introdução'],
-      content: 'Este é o primeiro post do meu blog.',
       href: '/blog/2025/01/01/welcome',
       date: '2025-01-01T00:00:00.000Z',
     },
@@ -157,11 +154,11 @@ describe('SearchBar', () => {
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   });
 
-  it('searches by content, not just title', async () => {
+  it('searches by tag, not by content', async () => {
     const user = userEvent.setup();
     render(<SearchBar searchIndex={mockIndex} />);
     const input = screen.getByRole('searchbox');
-    await user.type(input, 'framework');
+    await user.type(input, 'web development');
     expect(screen.getByText('Learning Astro')).toBeInTheDocument();
   });
 });

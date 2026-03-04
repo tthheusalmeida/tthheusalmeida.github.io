@@ -4,7 +4,6 @@ export interface SearchIndexEntry {
   title: string;
   slug: string;
   tags: string[];
-  content: string;
   href: string;
   date: string;
 }
@@ -18,13 +17,11 @@ export interface RawPost {
   lang: string;
   draft: boolean;
   date: string;
-  content: string;
   href: string;
 }
 
 export interface CollectionEntry {
   id: string;
-  body?: string;
   data: {
     title: string;
     slug: string;
@@ -43,7 +40,6 @@ export function toRawPosts(entries: CollectionEntry[]): RawPost[] {
     lang: entry.data.lang,
     tags: entry.data.tags,
     draft: entry.data.draft,
-    content: entry.body ?? '',
     href: `/blog/${entry.id.replace(/\.(en|pt)$/, '')}`,
   }));
 }
@@ -60,7 +56,6 @@ export function buildSearchIndex(posts: RawPost[]): SearchIndex {
       title: post.title,
       slug: post.slug,
       tags: post.tags,
-      content: stripMarkdown(post.content),
       href: post.href,
       date: post.date,
     });
@@ -70,19 +65,4 @@ export function buildSearchIndex(posts: RawPost[]): SearchIndex {
   index.pt.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return index;
-}
-
-export function stripMarkdown(text: string): string {
-  return text
-    .replace(/^---[\s\S]*?---/m, '')
-    .replace(/^#{1,6}\s+/gm, '')
-    .replace(/\*\*(.+?)\*\*/g, '$1')
-    .replace(/\*(.+?)\*/g, '$1')
-    .replace(/`{1,3}[\s\S]*?`{1,3}/g, '')
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-    .replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1')
-    .replace(/>\s?/gm, '')
-    .replace(/\n{2,}/g, ' ')
-    .replace(/\n/g, ' ')
-    .trim();
 }

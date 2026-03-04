@@ -9,7 +9,6 @@ function makeIndex(overrides: Partial<SearchIndex> = {}): SearchIndex {
         title: 'Welcome to my blog',
         slug: 'welcome',
         tags: ['welcome', 'introduction'],
-        content: 'This is the first post on my blog.',
         href: '/blog/2025/01/01/welcome',
         date: '2025-01-01T00:00:00.000Z',
       },
@@ -17,7 +16,6 @@ function makeIndex(overrides: Partial<SearchIndex> = {}): SearchIndex {
         title: 'Learning Astro',
         slug: 'learning-astro',
         tags: ['astro', 'web development'],
-        content: 'Astro is a great framework for building static sites.',
         href: '/blog/2025/01/02/learning-astro',
         date: '2025-01-02T00:00:00.000Z',
       },
@@ -27,7 +25,6 @@ function makeIndex(overrides: Partial<SearchIndex> = {}): SearchIndex {
         title: 'Bem-vindo ao meu blog',
         slug: 'bem-vindo',
         tags: ['bem-vindo', 'introdução'],
-        content: 'Este é o primeiro post do meu blog.',
         href: '/blog/2025/01/01/welcome',
         date: '2025-01-01T00:00:00.000Z',
       },
@@ -35,7 +32,6 @@ function makeIndex(overrides: Partial<SearchIndex> = {}): SearchIndex {
         title: 'Aprendendo Astro',
         slug: 'aprendendo-astro',
         tags: ['astro', 'desenvolvimento web'],
-        content: 'Astro é um ótimo framework para construir sites estáticos.',
         href: '/blog/2025/01/02/learning-astro',
         date: '2025-01-02T00:00:00.000Z',
       },
@@ -65,11 +61,10 @@ describe('searchPosts', () => {
     expect(results[0].slug).toBe('learning-astro');
   });
 
-  it('finds posts by content', () => {
+  it('does not search by content', () => {
     const index = makeIndex();
     const results = searchPosts('framework', index, 'en');
-    expect(results).toHaveLength(1);
-    expect(results[0].slug).toBe('learning-astro');
+    expect(results).toHaveLength(0);
   });
 
   it('is case-insensitive', () => {
@@ -91,7 +86,7 @@ describe('searchPosts', () => {
 
   it('supports multi-word search (all terms must match)', () => {
     const index = makeIndex();
-    const results = searchPosts('astro framework', index, 'en');
+    const results = searchPosts('astro web', index, 'en');
     expect(results).toHaveLength(1);
     expect(results[0].slug).toBe('learning-astro');
   });
@@ -100,13 +95,6 @@ describe('searchPosts', () => {
     const index = makeIndex();
     const results = searchPosts('astro welcome', index, 'en');
     expect(results).toHaveLength(0);
-  });
-
-  it('returns multiple results when query matches multiple posts', () => {
-    const index = makeIndex();
-    const results = searchPosts('blog', index, 'en');
-    expect(results).toHaveLength(1);
-    expect(results[0].slug).toBe('welcome');
   });
 
   it('handles missing language gracefully', () => {

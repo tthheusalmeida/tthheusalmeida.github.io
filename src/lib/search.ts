@@ -16,7 +16,6 @@ export function searchPosts(
     const haystack = [
       entry.title,
       entry.tags.join(' '),
-      entry.content,
     ]
       .join(' ')
       .toLowerCase();

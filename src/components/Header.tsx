@@ -52,6 +52,12 @@ export function Header({ searchIndex }: HeaderProps) {
         {t(lang, 'header.name')}
       </a>
 
+      {searchIndex && (
+        <div className="flex-1 flex justify-center px-4">
+          <SearchBar searchIndex={searchIndex} />
+        </div>
+      )}
+
       <div className="flex items-center gap-1 sm:gap-2">
         <Button asChild size="sm" className="min-w-[6rem] gap-1">
           <a
@@ -73,10 +79,6 @@ export function Header({ searchIndex }: HeaderProps) {
             <Github className="h-5 w-5" />
           </a>
         </Button>
-
-        <span className="mx-1 h-5 w-px bg-border" aria-hidden="true" />
-
-        {searchIndex && <SearchBar searchIndex={searchIndex} />}
 
         <span className="mx-1 h-5 w-px bg-border" aria-hidden="true" />
 
