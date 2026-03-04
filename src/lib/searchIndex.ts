@@ -1,4 +1,5 @@
 import type { Lang } from './i18n';
+import { stripLangSuffix } from './utils';
 
 export interface SearchIndexEntry {
   title: string;
@@ -40,7 +41,7 @@ export function toRawPosts(entries: CollectionEntry[]): RawPost[] {
     lang: entry.data.lang,
     tags: entry.data.tags,
     draft: entry.data.draft,
-    href: `/blog/${entry.id.replace(/\.(en|pt)$/, '')}`,
+    href: `/blog/${stripLangSuffix(entry.id)}`,
   }));
 }
 
