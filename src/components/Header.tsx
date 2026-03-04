@@ -49,11 +49,10 @@ export function Header() {
       <div className="flex items-center gap-2">
         <Button variant="ghost" size="icon" onClick={cycleLang} aria-label="Toggle language">
           <Globe className="h-5 w-5" />
-          <span className="sr-only">Language</span>
           <span className="text-xs font-medium">{lang.toUpperCase()}</span>
         </Button>
 
-        <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Toggle theme">
+        <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}>
           {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         </Button>
       </div>
