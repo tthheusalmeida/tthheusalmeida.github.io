@@ -21,10 +21,19 @@ export function BlogPostToc() {
       const elements = prose.querySelectorAll('h1, h2, h3');
       const items: TocItem[] = [];
 
+      const seenIds = new Set<string>();
       elements.forEach((el) => {
         if (!el.id) {
-          el.id = el.textContent?.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '') ?? '';
+          let base = el.textContent?.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '') ?? '';
+          let candidate = base;
+          let counter = 1;
+          while (seenIds.has(candidate)) {
+            candidate = `${base}-${counter}`;
+            counter++;
+          }
+          el.id = candidate;
         }
+        seenIds.add(el.id);
         items.push({
           id: el.id,
           text: el.textContent ?? '',
