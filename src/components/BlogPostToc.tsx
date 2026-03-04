@@ -84,7 +84,7 @@ export function BlogPostToc() {
   }, [headings]);
 
   return (
-    <aside className="hidden min-w-[12rem] shrink-0 xl:block mx-12">
+    <aside className="hidden min-w-[12rem] shrink-0 mx-12 xl:block">
       {headings.length > 0 && (
         <nav className="sticky top-20 space-y-1" aria-label="Table of contents">
           <span className="mb-2 block text-xs font-medium tracking-wide text-muted-foreground/70">
