@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { BlogHome } from '../components/BlogHome';
 import { buildSearchIndex, toRawPosts } from '../lib/searchIndex';
+import { stripLangSuffix } from '../lib/utils';
 
 const allPosts = await getCollection('blog');
 
@@ -13,7 +14,7 @@ const posts = allPosts.map((entry) => ({
   lang: entry.data.lang,
   tags: entry.data.tags,
   draft: entry.data.draft,
-  href: `/blog/${entry.id.replace(/\.(en|pt)$/, '')}`,
+  href: `/blog/${stripLangSuffix(entry.id)}`,
 }));
 
 const searchIndex = buildSearchIndex(toRawPosts(allPosts));

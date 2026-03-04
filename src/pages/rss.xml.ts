@@ -1,6 +1,7 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
+import { stripLangSuffix } from '../lib/utils';
 
 export async function GET(context: APIContext) {
   const allPosts = await getCollection('blog');
@@ -16,7 +17,7 @@ export async function GET(context: APIContext) {
     items: posts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,
-      link: `/blog/${post.id.replace(/\.(en|pt)$/, '')}/`,
+      link: `/blog/${stripLangSuffix(post.id)}/`,
       categories: post.data.tags,
       customData: `<language>${post.data.lang}</language>`,
     })),
