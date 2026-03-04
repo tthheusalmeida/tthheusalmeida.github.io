@@ -102,7 +102,10 @@ const hreflangs = availableLangs.map((lang) => ({
     aria-valuemax="100"
   ></div>
 
-  <div class="mx-auto flex max-w-5xl gap-8 px-4 py-8 sm:px-6">
+  <div class="mx-auto flex max-w-7xl gap-8 px-4 py-8 sm:px-6">
+    <!-- Left spacer to center content on desktop (mirrors right TOC aside) -->
+    <div class="hidden min-w-[12rem] shrink-0 mx-12 xl:block" aria-hidden="true"></div>
+
     <div class="min-w-0 flex-1">
       <a
         href="/"
@@ -122,13 +125,6 @@ const hreflangs = availableLangs.map((lang) => ({
             <header class="mb-16 text-center">
               <h1 class="text-3xl font-bold text-foreground">{data.title}</h1>
               <div class="mt-2 flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                <span
-                  class="inline-flex items-center rounded-full border border-border px-2 py-0.5 text-xs font-medium uppercase text-muted-foreground"
-                  title={lang === 'pt' ? 'Português' : 'English'}
-                >
-                  {lang === 'pt' ? '🇧🇷 PT' : '🇺🇸 EN'}
-                </span>
-                <span>·</span>
                 <time datetime={data.date.toISOString()}>
                   {data.date.toLocaleDateString(
                     lang === 'pt' ? 'pt-BR' : 'en-US',

@@ -83,30 +83,30 @@ export function BlogPostToc() {
     return () => observer.disconnect();
   }, [headings]);
 
-  if (headings.length === 0) return null;
-
   return (
-    <aside className="hidden w-48 shrink-0 xl:block">
-      <nav className="sticky top-20 space-y-1" aria-label="Table of contents">
-        <span className="mb-2 block text-xs font-medium tracking-wide text-muted-foreground/70">
-          {t(lang, 'toc.title')}
-        </span>
-        {headings.map(({ id, text, level }) => (
-          <a
-            key={id}
-            href={`#${id}`}
-            className={`block text-sm transition-colors hover:text-foreground ${
-              level === 1
-                ? 'font-semibold text-foreground'
-                : level === 2
-                  ? 'pl-3 text-muted-foreground'
-                  : 'pl-6 text-muted-foreground'
-            } ${activeId === id ? 'text-primary' : ''}`}
-          >
-            {text}
-          </a>
-        ))}
-      </nav>
+    <aside className="hidden min-w-[12rem] shrink-0 mx-12 xl:block">
+      {headings.length > 0 && (
+        <nav className="sticky top-20 space-y-1" aria-label="Table of contents">
+          <span className="mb-2 block text-xs font-medium tracking-wide text-muted-foreground/70">
+            {t(lang, 'toc.title')}
+          </span>
+          {headings.map(({ id, text, level }) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              className={`block text-sm transition-colors hover:text-foreground ${
+                level === 1
+                  ? 'font-semibold text-foreground'
+                  : level === 2
+                    ? 'pl-3 text-muted-foreground'
+                    : 'pl-6 text-muted-foreground'
+              } ${activeId === id ? 'text-primary' : ''}`}
+            >
+              {text}
+            </a>
+          ))}
+        </nav>
+      )}
     </aside>
   );
 }

@@ -46,7 +46,7 @@ export function Header({ searchIndex }: HeaderProps) {
     <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between border-b border-border bg-background/80 px-4 py-3 backdrop-blur-sm sm:px-6">
       <a
         href="https://tthheusalmeida.github.io/"
-        className="text-lg font-bold text-foreground hover:text-foreground/80 transition-colors"
+        className="text-base font-bold text-foreground hover:text-foreground/80 transition-colors sm:text-lg"
         aria-label={t(lang, 'header.visitPortfolio')}
       >
         {t(lang, 'header.name')}
@@ -59,28 +59,30 @@ export function Header({ searchIndex }: HeaderProps) {
       )}
 
       <div className="flex items-center gap-1 sm:gap-2">
-        <Button asChild size="sm" className="min-w-[6rem] gap-1">
-          <a
-            href="https://almeida-matheus.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t(lang, 'header.portfolio')}
-            <ArrowRight className="h-4 w-4" />
-          </a>
-        </Button>
+        <div className="hidden items-center gap-1 sm:flex sm:gap-2">
+          <Button asChild size="sm" className="min-w-[6rem] gap-1">
+            <a
+              href="https://almeida-matheus.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t(lang, 'header.portfolio')}
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </Button>
 
-        <Button asChild variant="ghost" size="icon" aria-label={t(lang, 'header.github')}>
-          <a
-            href="https://github.com/tthheusalmeida"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Github className="h-5 w-5" />
-          </a>
-        </Button>
+          <Button asChild variant="ghost" size="icon" aria-label={t(lang, 'header.github')}>
+            <a
+              href="https://github.com/tthheusalmeida"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+          </Button>
 
-        <span className="mx-1 h-5 w-px bg-border" aria-hidden="true" />
+          <span className="mx-1 h-5 w-px bg-border" aria-hidden="true" />
+        </div>
 
         <Button variant="ghost" size="sm" onClick={cycleLang} aria-label={t(lang, 'header.toggleLanguage')} className="min-w-[3.5rem] gap-1 px-3">
           <Globe className="h-5 w-5" />

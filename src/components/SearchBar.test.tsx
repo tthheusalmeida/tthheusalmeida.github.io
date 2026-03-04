@@ -161,4 +161,31 @@ describe('SearchBar', () => {
     await user.type(input, 'web development');
     expect(screen.getByText('Learning Astro')).toBeInTheDocument();
   });
+
+  it('does not show clear button when input is empty', () => {
+    render(<SearchBar searchIndex={mockIndex} />);
+    const clearBtn = screen.queryByLabelText('Clear search');
+    expect(clearBtn).toHaveAttribute('aria-hidden', 'true');
+    expect(clearBtn).toHaveAttribute('tabIndex', '-1');
+  });
+
+  it('shows clear button when input has text', async () => {
+    const user = userEvent.setup();
+    render(<SearchBar searchIndex={mockIndex} />);
+    const input = screen.getByRole('searchbox');
+    await user.type(input, 'Astro');
+    expect(screen.getByLabelText('Clear search')).toBeInTheDocument();
+  });
+
+  it('clears search and closes dropdown when clear button is clicked', async () => {
+    const user = userEvent.setup();
+    render(<SearchBar searchIndex={mockIndex} />);
+    const input = screen.getByRole('searchbox');
+    await user.type(input, 'Welcome');
+    expect(screen.getByRole('listbox')).toBeInTheDocument();
+    await user.click(screen.getByLabelText('Clear search'));
+    expect(input).toHaveValue('');
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Clear search')).toHaveAttribute('aria-hidden', 'true');
+  });
 });

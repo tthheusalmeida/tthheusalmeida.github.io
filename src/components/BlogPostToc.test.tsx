@@ -83,9 +83,11 @@ describe('BlogPostToc', () => {
     document.body.innerHTML = '';
   });
 
-  it('renders nothing when no headings exist', () => {
+  it('renders aside even when no headings exist (reserves layout space)', () => {
     const { container } = render(<BlogPostToc />);
-    expect(container.querySelector('aside')).toBeNull();
+    const aside = container.querySelector('aside');
+    expect(aside).toBeInTheDocument();
+    expect(aside!.querySelector('nav')).toBeNull();
   });
 
   it('renders ToC title in sentence case (not uppercase) for EN', () => {

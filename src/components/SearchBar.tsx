@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Search } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 import { t, type Lang } from '@/lib/i18n';
 import { useLang } from '@/lib/useLang';
 import { searchPosts } from '@/lib/search';
@@ -59,13 +59,23 @@ export function SearchBar({ searchIndex }: SearchBarProps) {
           aria-label={t(lang, 'search.label')}
           className="w-28 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none sm:w-40"
         />
+        <button
+          type="button"
+          onClick={() => { setQuery(''); inputRef.current?.focus(); }}
+          aria-label={t(lang, 'search.clear')}
+          aria-hidden={!query || undefined}
+          tabIndex={query ? 0 : -1}
+          className={`text-muted-foreground hover:text-foreground transition-colors ${!query ? 'invisible' : ''}`}
+        >
+          <X className="h-4 w-4" />
+        </button>
       </div>
 
       {open && (
         <div
           role="listbox"
           aria-label={t(lang, 'search.label')}
-          className="absolute right-0 top-full z-50 mt-1 max-h-80 w-72 overflow-y-auto rounded-md border border-border bg-popover shadow-lg sm:w-80"
+          className="absolute left-1/2 top-full z-50 mt-1 max-h-80 min-w-[20rem] -translate-x-1/2 overflow-y-auto rounded-md border border-border bg-popover shadow-lg"
         >
           {results.length === 0 ? (
             <p className="p-3 text-sm text-muted-foreground">
@@ -80,7 +90,7 @@ export function SearchBar({ searchIndex }: SearchBarProps) {
                 aria-selected={false}
                 className="flex flex-col gap-1 border-b border-border px-3 py-2 last:border-b-0 hover:bg-accent transition-colors"
               >
-                <span className="text-sm font-medium text-foreground">
+                <span className="text-sm font-medium text-foreground break-words">
                   {entry.title}
                 </span>
                 <span className="flex gap-1 flex-wrap">
