@@ -1,6 +1,6 @@
 ---
 title: "Como esse blog foi feito"
-draft: true
+draft: false
 slug: "como-esse-blog-foi-feito"
 date: 2026-03-05
 lang: "pt"
